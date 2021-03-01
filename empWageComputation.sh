@@ -5,14 +5,18 @@ EMP_RATE_PER_HR=20
 FULL_TIME_HRS=2
 PART_TIME_HRS=1
 NO_WORKING_DAYS=20
+MAX_HRS=100
 
 #varibles
-totalSalary=0
+totalEmpHrs=0
+totalWorkingDays=0
 
-for ((day=1; day<=NO_WORKING_DAYS; day++))
+while [[ $totalEmpHrs -lt $MAX_HRS &&  $totalWorkingDays -lt $NO_WORKING_DAYS ]]
+
 do
-	empCheck=$((RANDOM%2))
-case $empCheck in 
+	((totalWorkingDays++))
+	empCheck=$((RANDOM%3))
+	case $empCheck in 
 					$FULL_TIME_HRS)
 						empHrs=8
 						;;
@@ -22,9 +26,9 @@ case $empCheck in
 					*)
 						empHrs=0
 						;;
-esac
-
-salary=$(($EMP_RATE_PER_HR*$empHrs))
-totalSalary=$(($totalSalary+$salary))
+	esac
+	totalEmpHrs=$(($totalEmpHrs+$empHrs))
 done
+
+totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR))
 echo $totalDSalary
