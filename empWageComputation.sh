@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #constants
 EMP_RATE_PER_HR=20
@@ -9,15 +9,17 @@ PART_TIME_HRS=1
 empCheck=$((RANDOM%2))
 
 
-if [ $empCheck -eq $FULL_TIME_HRS ]
-then
-		empHrs=8
-elif [ $empCheck -eq $PART_TIME_HRS ]
-then
-		empHrs=4
-else
-		empHrs=0
-fi
+case $empCheck in 
+					$FULL_TIME_HRS)
+						empHrs=8
+						;;
+					$PART_TIME_HRS)
+						empHrs=4
+						;;
+					*)
+						empHrs=0
+						;;
+esac
 
-salary=$(($empHrs*$EMP_RATE_PER_HR))
+salary=$(($EMP_RATE_PER_HR*$empHrs))
 echo $salary
