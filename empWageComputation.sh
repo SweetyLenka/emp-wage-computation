@@ -8,15 +8,9 @@ FULL_TIME_HRS=8
 empCheck=$((RANDOM%2))
 isPresent=1
 
-if [ $empCheck -eq 4isPresenr ]
-then
-
-empCheck=$((RANDOM%2))
-isPresent=1
-
 if [ $empCheck -eq $isPresent ]
 then
-		salary=$(())
+echo salary=$(($EMP_RATE_PER_HR*$FULL_TIME_HRS))
 else
 		echo "Employee is absent"
 fi
