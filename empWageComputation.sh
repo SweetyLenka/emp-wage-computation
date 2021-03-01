@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash 
 
 #constants
 EMP_RATE_PER_HR=20
@@ -27,14 +27,23 @@ function getWorkingHrs()
    echo $empHrs
 
 }
+
+function getEmpWage()
+{
+	local empHrs=$1
+	echo $(($empHr+$EMP_RATE_PER_HR))
+}
+
 while [[ $totalEmpHrs -lt $MAX_HRS && $totalWorkingDays -lt $NO_WORKING_DAYS ]]
 do
    ((totalWorkingDays++))
    empCheck=$((RANDOM%3))
    empHrs=$( getWorkingHrs $empCheck )
    totalEmpHrs=$(($totalEmpHrs+$empHrs))
+	dailyWage=[$totalWorkingDays]=$( getEmpWage $empHrs)
 
 done
 
 totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR))
 echo $totalSalary
+echo ${dailyWage[@]}
