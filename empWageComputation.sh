@@ -2,16 +2,22 @@
 
 #constants
 EMP_RATE_PER_HR=20
-FULL_TIME_HRS=8
+FULL_TIME_HRS=2
+PART_TIME_HRS=1
 
 #varibles
 empCheck=$((RANDOM%2))
-isPresent=1
 
-if [ $empCheck -eq $isPresent ]
+
+if [ $empCheck -eq $FULL_TIME_HRS ]
 then
-echo salary=$(($EMP_RATE_PER_HR*$FULL_TIME_HRS))
+		empHrs=8
+elif [ $empCheck -eq $PART_TIME_HRS ]
+then
+		empHrs=4
 else
-		echo "Employee is absent"
+		empHrs=0
 fi
 
+salary=$(($empHrs*$EMP_RATE_PER_HR))
+echo $salary
