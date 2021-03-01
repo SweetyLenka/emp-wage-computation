@@ -11,6 +11,8 @@ MAX_HRS=100
 totalEmpHrs=0
 totalWorkingDays=0
 
+declare -A dailyWage
+
 function getWorkingHrs()
 {
    case $1 in
@@ -40,10 +42,12 @@ do
    empCheck=$((RANDOM%3))
    empHrs=$( getWorkingHrs $empCheck )
    totalEmpHrs=$(($totalEmpHrs+$empHrs))
-	dailyWage=[$totalWorkingDays]=$( getEmpWage $empHrs)
+	dailyWage=["Day "$totalWorkingDays]=$( getEmpWage $empHrs)
 
 done
 
 totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR))
 echo $totalSalary
-echo ${dailyWage[@]}
+echo Daily Wages ${dailyWage[@]}
+echo  All Keys ${!dailyWage[@]}
+
